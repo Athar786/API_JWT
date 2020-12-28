@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
-use JWTAuth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Stmt\If_;
 
 class AuthController extends Controller
 {
     public $loginAfterSignUp = true;
-    protected $user;
 
     public function __construct()
     {
@@ -51,13 +48,6 @@ class AuthController extends Controller
         ],201);
         // return redirect('home');
     }
-
-    public function all()
-    {
-        $user = User::all();
-        return response()->json($user);
-    }
-
     public function edit($id)
     {
         $user = User::findOrFail($id);
@@ -66,8 +56,8 @@ class AuthController extends Controller
 
     public function update(Request $request,$id)
     {
-        dd($request->all());
-        return response()->json($request->all());
+        // dd($request->all());
+        // return response()->json($request->all());
         $user = User::find($id);
         if(!$user)
         {
@@ -78,12 +68,6 @@ class AuthController extends Controller
         }
 
         $update  = $user->fill($request->all())->save();
-        // $user->name = Request('name');
-        // $user->surname = Request('surname');
-        // $user->username = Request('username');
-        // $user->phone_number = Request('phone_number');
-        // $user->company = Request('company');
-        // $user->update();
         if($update)
         {
             return response()->json([

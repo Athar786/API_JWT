@@ -30,6 +30,6 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
     Route::patch('register/{id}','AuthController@update');
-    // Route::get('edit/{id}','AuthController@edit');
-    Route::get('user','AuthController@all');
+    Route::resource('cat', 'CategoriesController');
+    // Route::patch('cat/{id}','CategoriesController@update');
 });
